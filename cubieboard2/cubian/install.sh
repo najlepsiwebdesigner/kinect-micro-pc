@@ -92,9 +92,12 @@
 # clone and compile pcl
 	cd ~/Kinect/
 	git clone https://github.com/PointCloudLibrary/pcl	
-	
-	
-	
+	cd pcl
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=Release ..
+	make
+	sudo make install
 	
 #clone and compile rgbdemo	
 	sudo apt-get install libcv-dev
