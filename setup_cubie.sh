@@ -16,3 +16,15 @@ cd ./node
 ./configure
 make
 sudo make install
+
+# install libfreenect
+cd ~
+git clone https://github.com/OpenKinect/libfreenect
+cd libfreenect
+
+#install libfreenect deps
+sudo apt-get install libusb-1.0.0 freeglut3 libxmu-dev libxi-dev
+
+mkdir build
+cd build
+cmake ..
