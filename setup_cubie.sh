@@ -53,4 +53,33 @@ echo "Please modify file /OpenNI/Platform/Linux/Build/Common/Platform.Arm and re
 
 # install openni deps 
 echo "Installing Openni dependancies"
-sudo apt-get install openjdk-6-jdk doxygen
+sudo apt-get install openjdk-6-jdk doxygen graphviz
+
+# compile and install Openni
+cd ~/Kinect/OpenNI/Platform/Linux/CreateRedist
+sudo ./RedistMaker.Arm
+cd ../Redist
+echo "cd to directory"
+#cd  OpenNI-Bin-Dev-Linux-Arm-v1.5.7.10
+sudo ./install.sh
+
+# install PCL
+echo "installing PCL"
+cd ~/Kinect/
+git clone https://github.com/PointCloudLibrary/pcl
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
