@@ -105,8 +105,17 @@ make
 sudo make install
 
 
+# install opencv
+sudo apt-get install libopencv-dev
 
-
+# clone rgbdemo
+cd ~/Kinect
+git clone --recursive http://github.com/rgbdemo/rgbdemo
+cd rgbdemo
+mkdir build && cd build
+cmake ..
+# now modfify CmakeCache and turn off NITE and OpenNI2
+make
 
 
 
