@@ -89,11 +89,20 @@ sudo apt-get install libglew-dev
 cd ~/Kinect/pcl
 cmake -DCMAKE_BUILD_TYPE=Release .
 
+# now please manually modify file CMakeCache.txt and set cmake flags correctly to 
+# build visualizations and apps
+# you need mestlib to successfully build "recognition" and its dependancies 
+# @TODO install/import mestlib
+# For compilation, you need plenty of memory. 1GB is not enough, 
+# so please create swap partition with at least 2GB space with following commands before building:
 
-# now please manually modify file CMakeCache.txt and set cmake flags correctly to build visualizations and apps
+# dd if=/dev/zero of=~/swap bs=1024 count=SIZE # 1GB = 1048576
+# mkswap ~/swap
+# swapon ~/swap
 
-
-
+cd ~/Kinect/pcl/
+make
+sudo make install
 
 
 
