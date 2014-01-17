@@ -149,6 +149,10 @@ sudo make install
 # install opencv
 sudo apt-get install libopencv-dev
 
+
+# NOTICE: RGBDemo is not compatible with newest libfreenect sources, so before installation of RGBDemo you shoul 
+# reinstall libfreenect from this repository https://github.com/nburrus/libfreenect
+
 # clone rgbdemo
 cd ~/Kinect
 git clone --recursive http://github.com/rgbdemo/rgbdemo
