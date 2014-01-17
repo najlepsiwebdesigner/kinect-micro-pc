@@ -43,6 +43,12 @@ make
 sudo make install
 
 
+# install sensorkinect
+git clone http://github.com/avin2/SensorKinect
+
+
+
+
 # install openni
 
 echo "Installing Openni"
@@ -164,7 +170,7 @@ cmake ..
 #OPENNI2_INCLUDE_DIR:PATH=~/Kinect/OpenNI2/Packaging/Final/OpenNI-Linux-Arm-2.2/Include
 
 #//Path to a library.
-#OPENNI2_LIBRARY:FILEPATH=~/Kinect/OpenNI2/Packaging/Final/OpenNI-Linux-Arm-2.2
+#OPENNI2_LIBRARY:FILEPATH=~/Kinect/OpenNI2/Packaging/Final/OpenNI-Linux-Arm-2.2/Redist/libOpenNI2.so
 
 
 make
