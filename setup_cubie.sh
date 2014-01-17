@@ -5,7 +5,7 @@
 echo "Installing essential programs to work with cubian desktop"
 
 sudo apt-get update
-sudo apt-get install xfce4 ristretto geany iceweasel terminator 
+sudo apt-get install xfce4 ristretto geany iceweasel terminator python
 
 # install common development packages
 echo "Installing common development packages"
@@ -63,6 +63,47 @@ echo "cd to directory"
 #cd  OpenNI-Bin-Dev-Linux-Arm-v1.5.7.10
 sudo ./install.sh
 
+
+#install OpenNI2 deps
+echo "Installing OpenNI2 dependancies";
+sudo apt-get install libudev-dev
+
+echo "Please modify Platform.Arm file to meet requirements for Cubieboard";
+vi ThirdParty/PSCommon/BuildSystem/Platform.Arm 
+
+#ifeq "$(CFG)" "Release"
+
+    # Hardware specifying flags
+    #CFLAGS += -march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp #-mcpu=cortex-a8
+#    CFLAGS += -march=armv7-a -mtune=cortex-a9 -mfpu=vfp -mfloat-abi=hard #-mcpu=cortex-a8
+
+    # Optimization level, minus currently buggy optimizing methods (which break bit-exact)
+#    CFLAGS += -O3 -fno-tree-pre -fno-strict-aliasing
+
+    # More optimization flags
+#    CFLAGS += -ftree-vectorize -ffast-math -funsafe-math-optimizations #-fsingle-precision-constant
+
+    #DEFINES += XN_NEON
+#    CFLAGS += -flax-vector-conversions
+#endif
+
+cd Packaging
+python ReleaseVersion.py Arm
+cd Final/
+tar -jxvf OpenNI-Linux-Arm-2.2.tar.bz2
+cd OpenNI-Linux-Arm-2.2
+sudo sh install.sh # no output fuck
+
+
+# install OpenNI2
+echo "Installing OpenNI2";
+
+cd ~/Kinect
+git clone http://github.com/OpenNI/OpenNI2
+cd OpenNI2
+make
+
+
 # install PCL
 echo "installing PCL"
 cd ~/Kinect/
@@ -114,9 +155,15 @@ git clone --recursive http://github.com/rgbdemo/rgbdemo
 cd rgbdemo
 mkdir build && cd build
 cmake ..
-# now modfify CmakeCache and turn off NITE and OpenNI2
-make
+# now modfify CmakeCache - turn off NITE and set paths for OpenNI2
+#//Path to a file.
+#OPENNI2_INCLUDE_DIR:PATH=~/Kinect/OpenNI2/Packaging/Final/OpenNI-Linux-Arm-2.2/Include
 
+#//Path to a library.
+#OPENNI2_LIBRARY:FILEPATH=~/Kinect/OpenNI2/Packaging/Final/OpenNI-Linux-Arm-2.2
+
+
+make
 
 
 
