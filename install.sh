@@ -88,9 +88,25 @@ swapon ~/swap
 # clone and compile sensorkinect
 	cd ~/Kinect
 	git clone git://github.com/avin2/SensorKinect.git	
+	cd ~/Kinect/SensorKinect/
+	echo "Please modify: ./Platform/Linux/Build/Common/Platform.Arm, remove -mfloat-abi"
+	cd ./Platform/Linux/CreateRedist
+	sudo ./RedistMaker
+	cd Final
+	sudo tar -xvf Sensor-Bin-Linux-Arm-v5.1.2.1.tar.bz2 
+	cd Sensor-Bin-Linux-Arm-v5.1.2.1/Config
+	echo "Please edit GlobalDefaultsKinect.ini, uncomment and change UsbInterface to value 1"
+	sudo ./install.sh
+	
+	echo "to test, if everything is working you can go to: ~/Kinect/OpenNI/Platform/Linux/Bin/Arm-Release"
+	echo "and run sudo ./Sample-NiSimpleRead"
 	
 	
-#	@TODO!!!!!
+# clone and compile pcl
+	cd ~/Kinect/
+	git clone https://github.com/PointCloudLibrary/pcl	
+	
+	
 	
 	
 #clone and compile rgbdemo	
