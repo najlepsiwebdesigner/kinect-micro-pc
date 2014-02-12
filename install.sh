@@ -101,6 +101,18 @@ swapon ~/swap
 	echo "to test, if everything is working you can go to: ~/Kinect/OpenNI/Platform/Linux/Bin/Arm-Release"
 	echo "and run sudo ./Sample-NiSimpleRead"
 	
+
+
+# to make libfreenect work with python, you have to do this:
+	sudo apt-get install cython python-opencv
+	cd ~/Kinect/libfreenect/wrappers/python
+	sudo python setup.py install
+
+
+
+
+#	@TODO!!!!!
+
 	
 # clone and compile pcl
 	cd ~/Kinect/
@@ -117,4 +129,4 @@ swapon ~/swap
 	cmake ..
 
 
-#	@TODO!!!!!
+
