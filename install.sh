@@ -1,12 +1,16 @@
 #!/bin/sh
  
  
-# this script will install openni, libfreenect and RGBdemo now 
+# this script will install openni, libfreenect and RGBdemo on debian based-arm board, by default on cubieboard with cubian
 
 # CUBIAN DESKTOP AND SWAP
 echo "Installing essential programs to work with cubian desktop"
 sudo apt-get update
 sudo apt-get install xfce4 ristretto geany iceweasel terminator python
+
+
+# check if swap is neccessary, for rgbdemo, you need more than 1.5GB of memory, so we create swap
+cat /proc/meminfo | grep MemTotal | tr -s ' ' |  cut -f2 -d " "
 
 echo "Creating swap, please wait, this can take some time"
 dd if=/dev/zero of=~/swap bs=1024 count=SIZE # 1GB = 1048576
@@ -35,7 +39,7 @@ swapon ~/swap
 	
 	# install opencv
 	echo "Installing opencv"
-	sudo apt-get install libopencv-dev
+	sudo apt-get install libopencv-dev libcv-dev
 	
 	
 # clone and compile libfreenect
@@ -109,6 +113,17 @@ swapon ~/swap
 	sudo python setup.py install
 
 
+# install openni2, which navively supports xtion sensor
+	# install OpenNI2
+	echo "Installing OpenNI2";
+
+	cd ~/Kinect
+	git clone http://github.com/OpenNI/OpenNI2
+	cd OpenNI2
+	echo "Please modify ~/Kinect/vi ThirdParty/PSCommon/BuildSystem/Platform.Arm and replace softfp with hard"
+	make
+
+
 
 
 #	@TODO!!!!!
@@ -122,6 +137,7 @@ swapon ~/swap
 	
 	
 #clone and compile rgbdemo	
+	sudo apt-get install libcv-dev
 	cd ~/Kinect
 	git clone --recursive http://github.com/rgbdemo/rgbdemo
 	cd rgbdemo
